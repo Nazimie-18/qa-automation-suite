@@ -1,0 +1,112 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qa-automation-suite"
+version = "1.0.0"
+description = "企业级自动化测试框架，支持Web、App、API、功能测试、性能测试及一键报告生成"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Nazimie-18"}
+]
+keywords = ["qa", "automation", "testing", "selenium", "pytest", "appium", "locust"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Framework :: Selenium",
+    "Framework :: Pytest",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "pytest>=7.4",
+    "pytest-html>=4.1",
+    "pytest-cov>=4.1",
+    "selenium>=4.15",
+    "webdriver-manager>=4.0",
+    "requests>=2.31",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "jinja2>=3.1",
+    "colorlog>=6.8",
+    "pillow>=10.1",
+    "faker>=21.0",
+]
+
+[project.optional-dependencies]
+web = [
+    "playwright>=1.40",
+    "pytest-bdd>=6.1",
+]
+app = [
+    "Appium-Python-Client>=3.1",
+]
+api = [
+    "httpx>=0.25",
+]
+performance = [
+    "locust>=2.17",
+]
+database = [
+    "pymysql>=1.1",
+    "psycopg2-binary>=2.9",
+    "sqlalchemy>=2.0",
+]
+data = [
+    "openpyxl>=3.1",
+    "pandas>=2.1",
+]
+dev = [
+    "black>=23.12",
+    "flake8>=6.1",
+    "isort>=5.13",
+]
+all = [
+    "qa-automation-suite[web,app,api,performance,database,data,dev]",
+]
+
+[project.scripts]
+qa-run = "run_tests:main"
+qa-module-selector = "module_selector:main"
+
+[project.urls]
+Repository = "https://github.com/Nazimie-18/qa-automation-suite"
+Issues = "https://github.com/Nazimie-18/qa-automation-suite/issues"
+
+[tool.setuptools]
+py-modules = ["conftest", "run_tests", "module_selector"]
+packages = ["utils", "tests", "tests.api", "tests.app", "tests.web", "tests.performance", "tests.functional", "tests.functional.pages"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-ra --strict-markers --tb=short --disable-warnings"
+markers = [
+    "web: Web自动化测试",
+    "app: App自动化测试",
+    "api: API接口测试",
+    "functional: 功能测试",
+    "performance: 性能测试",
+    "vue: Vue前端测试",
+    "react: React前端测试",
+    "ios: iOS应用测试",
+    "android: Android应用测试",
+    "python: Python后端API",
+    "nodejs: Node.js后端API",
+    "java: Java后端API",
+    "smoke: 冒烟测试",
+    "regression: 回归测试",
+    "slow: 慢速测试",
+]

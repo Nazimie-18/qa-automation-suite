@@ -1,0 +1,154 @@
+# ==================== 浏览器配置 ====================
+browser:
+  chrome:
+    headless: false
+    window-size: 1920x1080
+    start-maximized: true
+    disable-gpu: true
+    no-sandbox: true
+    user-agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    implicit-wait: 10
+    explicit-wait: 15
+    page-load-timeout: 30
+  
+  firefox:
+    headless: false
+    window-size: 1920x1080
+    implicit-wait: 10
+    explicit-wait: 15
+    page-load-timeout: 30
+
+# ==================== Appium配置 ====================
+appium:
+  host: localhost
+  port: 4723
+  timeout: 30
+  implicit-wait: 10
+  explicit-wait: 15
+  
+  # iOS配置
+  ios:
+    platformName: iOS
+    automationName: XCUITest
+    udid: "" # 设备UUID
+    bundleId: "com.example.app"
+    xcodeOrgId: "" # Xcode Team ID
+    xcodeSigningId: "iPhone Developer"
+  
+  # Android配置
+  android:
+    platformName: Android
+    automationName: UiAutomator2
+    deviceName: emulator-5554
+    appPackage: com.example.app
+    appActivity: com.example.app.MainActivity
+    autoGrantPermissions: true
+
+# ==================== API配置 ====================
+api:
+  timeout: 30
+  retry: 3
+  retry-delay: 1
+  
+  # 后端服务配置
+  backends:
+    python:
+      base_url: http://localhost:8000
+      timeout: 30
+    nodejs:
+      base_url: http://localhost:3000
+      timeout: 30
+    java:
+      base_url: http://localhost:8080
+      timeout: 30
+  
+  # 请求头配置
+  headers:
+    Content-Type: application/json
+    Accept: application/json
+    User-Agent: "QA-Automation-Suite/1.0"
+
+# ==================== 截图配置 ====================
+screenshot:
+  enabled: true
+  on_failure: true
+  on_success: false
+  path: screenshots
+  format: png
+  quality: 95
+
+# ==================== 日志配置 ====================
+logging:
+  level: DEBUG
+  format: detailed
+  path: logs
+  file_name: automation.log
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+  console_output: true
+
+# ==================== 数据库配置 ====================
+database:
+  mysql:
+    host: localhost
+    port: 3306
+    user: root
+    password: password
+    database: test_db
+    charset: utf8mb4
+  
+  postgresql:
+    host: localhost
+    port: 5432
+    user: postgres
+    password: password
+    database: test_db
+
+# ==================== 报告配置 ====================
+report:
+  html:
+    enabled: true
+    path: reports/html
+    filename: report.html
+    theme: default
+  
+  json:
+    enabled: true
+    path: reports/json
+    filename: report.json
+  
+  allure:
+    enabled: true
+    path: reports/allure
+
+# ==================== 邮件配置 ====================
+email:
+  enabled: false
+  smtp_server: smtp.gmail.com
+  smtp_port: 587
+  sender: your_email@gmail.com
+  password: your_password
+  recipients:
+    - qa@example.com
+    - dev@example.com
+  subject: QA Automation Test Report
+
+# ==================== 性能测试配置 ====================
+performance:
+  locust:
+    host: http://localhost:8000
+    users: 100
+    spawn_rate: 10
+    run_time: 5m
+    step_load: false
+
+# ==================== 环境配置 ====================
+environment: dev  # dev, test, staging, prod
+
+# ==================== 代理配置 ====================
+proxy:
+  enabled: false
+  proxy_server: http://127.0.0.1:8080
+  no_proxy_list:
+    - localhost
+    - 127.0.0.1
